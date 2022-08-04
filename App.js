@@ -30,7 +30,7 @@ const vector = new VectorLayer({
   }),
 });
 */
-
+const x = 5 
 var template = '<div class="bg-modal" id="popup">\
 <div class="modal-content">\
   <div class="content">\
