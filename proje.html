@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,TextDecoder"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.18.3/minified.js"></script>
+    <link rel="stylesheet" href="node_modules/ol/ol.css">   
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css">
+    <link rel="stylesheet" href="style.css">
+  
+    <title>Document</title> 
+    <style>
+        .content_img {width: 100px; height: 75px; margin: 0px; display:block }
+        .content {background-color: #117881; height: 75px; display:flex;}
+        .content_map{width: 100%; height: 100%;}
+        .content_h1 {margin: 0px; text-align: left; padding-left: 25px; padding-top: 20px; color: #fff;}
+        .content_label {color:#fff; margin-right: 20px; background-color:gray; text-align: center; display: inline-block; min-height: 1em;outline: 0; vertical-align: baseline; font-family:Arial, Helvetica, sans-serif; margin: 0 0.25em 0 0; padding: 0.78571429em 1.5em 0.78571429em; border-radius: 8px;}
+        .content_button1 {border-color: red; border-radius: 8px; padding: 10px; background-color: #fff; color:red; font-weight: bold; border-style:solid;  box-shadow: inset 0 0 0 0 red; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .content_button2 {border-color: blue; border-radius: 8px; padding: 10px; background-color: #fff; color:blue; font-weight: bold; border-style:solid; box-shadow: inset 0 0 0 0 blue; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out;}
+        .content_button3 {border-color: green; border-radius: 8px; padding: 10px; background-color: #fff; color:green; font-weight: bold; border-style:solid; box-shadow: inset 0 0 0 0 green; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out;}
+        .content_editbutton {border-color: purple; border-radius: 8px; padding: 10px; background-color: #fff; color: purple; font-weight: bold; border-style: solid; box-shadow: inset 0 0 0 0 purple; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out;}
+        button {text-align: center; display: inline-block; cursor: pointer; min-height: 1em;outline: 0; vertical-align: baseline; font-family:Arial, Helvetica, sans-serif; margin: 0 0.25em 0 0; padding: 0.78571429em 1.5em 0.78571429em;
+        }
+        .map {
+        height: 500px;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      th { background-color: rgb(196, 194, 194); color: Red; font-weight: bold; border: 1px solid white; border-collapse: collapse; height:30px;}
+      table {border: 1px solid white; border-collapse: collapse; width: 100%;}
+      .div_buttons {margin-bottom: 10px;}
+     /* .popup_inside {position: fixed; left:0; top:0; overflow-y: auto; overflow-x: hidden; background-color: rgba(0, 0, 0, 0.5); transition: 0.5s; z-index: 1; width: 100vw; height: 100vh; } */
+      p {font-family: Arial, Helvetica, sans-serif; }
+      input {border-radius: 8px; border-style: solid;}
+      /*.popup { background-color: #fdfdfd; width: 400px; height: 50vh; text-align: center; position: absolute; left: 50%; top: 20%; transform: translate(-50%); border-radius: 10px;} */
+      .content_nonebutton{background-color: white; color:rgb(0, 0, 0); border-radius:8px; padding:10px; font-weight: bold; border-style: solid; box-shadow: inset 0 0 0 0 black; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out;}
+      form {width:100%; height: auto;}
+      .content_button1:hover { box-shadow: inset 100px 0 0 0 red ; color: white}
+      .content_button2:hover { box-shadow: inset 100px 0 0 0 blue ; color: white}
+      .content_button3:hover { box-shadow: inset 100px 0 0 0 green ; color: white}
+      .content_editbutton:hover { box-shadow: inset 100px 0 0 0 purple ; color: white}
+      .content_nonebutton:hover { box-shadow: inset 100px 0 0 0 black ; color: white}
+      p {width:auto; margin-top: 20px; margin-bottom: 20px; height:30px; text-align: center; background-color:gray; color:#fff; padding-top:15px}
+      input {width:100%; height:30px}
+      
+        
+    </style>
+</head>
+<body>
+
+  <!--
+  <div class="popup">
+    <div class="popup_inside">
+      <p>Şehir</p>
+      <input type="text" value="Şehri giriniz">
+      <p>İlçe</p>
+      <input type="text" value="İlçeyi giriniz">
+      <p>Mahalle</p>
+      <input type="text" value="Mahalleyi giriniz">
+    </div>
+  </div> 
+-->
+
+    <div class="content">
+        <img class="content_img" src="belsis.jpg" > 
+        <div class="content">
+         <h1 class="content_h1">Belsis Yazılım</h1>   
+        </div>
+   </div>
+   <div id="map" class="map"></div>
+
+<div class="div_buttons">
+    <label class="content_label" >Geometri Tipi</label>
+    <button class="content_button1" value="Polygon" id="Polygon"> Polygon </button>
+    <button class="content_button2" value="Point" id="Point"> Point</button>
+    <button class="content_button3" value="LineString" id="LineString"> LineString </button>
+    <button class="content_nonebutton" value="None" id="None"> None </button>
+    <button class="content_editbutton">Edit</button>
+</div>
+
+
+<div>
+  <form>
+    <table>
+        <th >Parsel İl</th>
+        <th >Parsel İlçe</th>
+        <th >Parsel Mahalle</th>
+        <th >Kaydet - Sil</th>
+    </table>
+  </form>
+</div>
+
+<div class="bg-modal" id="popup">
+  <div class="modal-content">
+    <div class="content">
+      <img class="content_img" src="belsis.jpg">
+      <h1 class="popup_h1">Parseli Kaydet</h1>
+    </div>
+    <div>
+     <p>İl</p>
+     <input type="text" value="Şehri Giriniz">
+     <P>İlçe</P>
+     <input type="text" value="İlçeyi Giriniz">
+     <p>Mahalle</p>
+     <input type="text" value="Mahalleyi Giriniz">
+     <button  class="button_kaydet" id="buttonKaydet">Parseli kaydet</button>
+    </div>
+    
+
+  </div>
+</div>
+
+<script type="module" src="App.js" ></script>
+
+
+
+  
+</body>
+</html>

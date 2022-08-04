@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,TextDecoder"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.18.3/minified.js"></script>
+    <link rel="stylesheet" href="/proje.77d99e9d.css">   
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css">
+    <link rel="stylesheet" href="/proje.3a01df49.css">
+  
+    <title>Document</title> 
+    <style>.content_img {
+  width: 100px;
+  height: 75px;
+  margin: 0;
+  display: block;
+}
+
+.content {
+  height: 75px;
+  background-color: #117881;
+  display: flex;
+}
+
+.content_map {
+  width: 100%;
+  height: 100%;
+}
+
+.content_h1 {
+  text-align: left;
+  color: #fff;
+  margin: 0;
+  padding-top: 20px;
+  padding-left: 25px;
+}
+
+.content_label {
+  color: #fff;
+  text-align: center;
+  min-height: 1em;
+  vertical-align: baseline;
+  background-color: gray;
+  border-radius: 8px;
+  outline: 0;
+  margin: 0 .25em 0 0;
+  padding: .785714em 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+}
+
+.content_button1 {
+  color: red;
+  background-color: #fff;
+  border-style: solid;
+  border-color: red;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  box-shadow: inset 0 0 red;
+}
+
+.content_button2 {
+  color: #00f;
+  background-color: #fff;
+  border-style: solid;
+  border-color: #00f;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  box-shadow: inset 0 0 #00f;
+}
+
+.content_button3 {
+  color: green;
+  background-color: #fff;
+  border-style: solid;
+  border-color: green;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  box-shadow: inset 0 0 green;
+}
+
+.content_editbutton {
+  color: purple;
+  background-color: #fff;
+  border-style: solid;
+  border-color: purple;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  box-shadow: inset 0 0 purple;
+}
+
+button {
+  text-align: center;
+  cursor: pointer;
+  min-height: 1em;
+  vertical-align: baseline;
+  outline: 0;
+  margin: 0 .25em 0 0;
+  padding: .785714em 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+}
+
+.map {
+  height: 500px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+th {
+  color: red;
+  border-collapse: collapse;
+  height: 30px;
+  background-color: #c4c2c2;
+  border: 1px solid #fff;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #fff;
+}
+
+.div_buttons {
+  margin-bottom: 10px;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+  border-style: solid;
+  border-radius: 8px;
+}
+
+.content_nonebutton {
+  color: #000;
+  background-color: #fff;
+  border-style: solid;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: bold;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+  box-shadow: inset 0 0 #000;
+}
+
+form {
+  width: 100%;
+  height: auto;
+}
+
+.content_button1:hover {
+  color: #fff;
+  box-shadow: inset 100px 0 red;
+}
+
+.content_button2:hover {
+  color: #fff;
+  box-shadow: inset 100px 0 #00f;
+}
+
+.content_button3:hover {
+  color: #fff;
+  box-shadow: inset 100px 0 green;
+}
+
+.content_editbutton:hover {
+  color: #fff;
+  box-shadow: inset 100px 0 purple;
+}
+
+.content_nonebutton:hover {
+  color: #fff;
+  box-shadow: inset 100px 0 #000;
+}
+
+p {
+  width: auto;
+  height: 30px;
+  text-align: center;
+  color: #fff;
+  background-color: gray;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 15px;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+}
+
+</style>
+</head>
+<body>
+
+  <!--
+  <div class="popup">
+    <div class="popup_inside">
+      <p>Şehir</p>
+      <input type="text" value="Şehri giriniz">
+      <p>İlçe</p>
+      <input type="text" value="İlçeyi giriniz">
+      <p>Mahalle</p>
+      <input type="text" value="Mahalleyi giriniz">
+    </div>
+  </div> 
+-->
+
+    <div class="content">
+        <img class="content_img" src="/belsis.05081069.jpg"> 
+        <div class="content">
+         <h1 class="content_h1">Belsis Yazılım</h1>   
+        </div>
+   </div>
+   <div id="map" class="map"></div>
+
+<div class="div_buttons">
+    <label class="content_label">Geometri Tipi</label>
+    <button class="content_button1" value="Polygon" id="Polygon"> Polygon </button>
+    <button class="content_button2" value="Point" id="Point"> Point</button>
+    <button class="content_button3" value="LineString" id="LineString"> LineString </button>
+    <button class="content_nonebutton" value="None" id="None"> None </button>
+    <button class="content_editbutton">Edit</button>
+</div>
+
+
+<div>
+  <form>
+    <table>
+        <th>Parsel İl</th>
+        <th>Parsel İlçe</th>
+        <th>Parsel Mahalle</th>
+        <th>Kaydet - Sil</th>
+    </table>
+  </form>
+</div>
+
+<div class="bg-modal" id="popup">
+  <div class="modal-content">
+    <div class="content">
+      <img class="content_img" src="/belsis.05081069.jpg">
+      <h1 class="popup_h1">Parseli Kaydet</h1>
+    </div>
+    <div>
+     <p>İl</p>
+     <input type="text" value="Şehri Giriniz">
+     <p>İlçe</p>
+     <input type="text" value="İlçeyi Giriniz">
+     <p>Mahalle</p>
+     <input type="text" value="Mahalleyi Giriniz">
+     <button class="button_kaydet" id="buttonKaydet">Parseli kaydet</button>
+    </div>
+    
+
+  </div>
+</div>
+
+<script src="/proje.7826abd7.js" defer=""></script>
+
+
+
+  
+</body>
+</html>

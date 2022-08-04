@@ -1,0 +1,56 @@
+.bg-modal { 
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility:hidden;
+}
+
+.modal-content {
+    width: 60%;
+    height: 57%;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(168, 168, 168);
+    
+   
+}
+
+.popup_h1{
+    margin: 0px;
+    text-align: center;
+    padding-left: 25px;
+    padding-top: 20px;
+    color: #fff;
+}
+
+.open_popup {
+    visibility: visible;
+}
+
+.button_kaydet { margin-bottom: 20px; 
+    margin-top:20px; 
+    width:100%; 
+    background-color: lightgreen;
+    color:#fff;
+    border-radius: 8px;
+    border-style:solid;
+    height: 50px;
+    border-color: lightgreen;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: inset 0 0 0 0 lightgreen; transition: color .3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.button_kaydet:hover {
+    box-shadow: inset 100% 0 0 0 0 #fff;
+    color: lightgreen;
+    background-color:#fff
+
+}
